@@ -12,7 +12,7 @@ WITH AuditData AS
     SELECT 
         [event_time]
       , [database_name]
-      , LEN(ISNULL([statement], '')) AS statement_length
+      , LEN(ISNULL([statement], '')) AS "statement_length"
     FROM sys.fn_get_audit_file_v2(
         @StoragePath,
         DEFAULT,    
