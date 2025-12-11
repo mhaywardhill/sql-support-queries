@@ -1,3 +1,7 @@
+/*
+This script queries SQL Server Query Store to retrieve detailed performance information for all queries containing the text “posts” within a specified time window. 
+*/
+
 SELECT
 	i.[start_time]
 ,	i.[end_time]
