@@ -22,21 +22,13 @@ SELECT
 ,	s.[count_executions]
 ,	s.[execution_type]
 ,	s.[execution_type_desc]
-FROM 
-	sys.query_store_query q
-JOIN
-	sys.query_store_query_text qt ON q.[query_text_id] = qt.[query_text_id]
-JOIN
-	sys.query_store_plan pl ON (q.[query_id] = pl.[query_id])
-JOIN 
-	sys.query_store_runtime_stats s ON (s.[plan_id] = pl.[plan_id])
-JOIN
-	sys.query_store_runtime_stats_interval i ON (s.[runtime_stats_interval_id] = i.[runtime_stats_interval_id])
-WHERE 
-	qt.[query_sql_text] like '%posts%'
-AND
-	i.[start_time] > '20251119 07:00' 
-AND
+FROM sys.query_store_query q
+JOIN sys.query_store_query_text qt ON q.[query_text_id] = qt.[query_text_id]
+JOIN sys.query_store_plan pl ON (q.[query_id] = pl.[query_id])
+JOIN sys.query_store_runtime_stats s ON (s.[plan_id] = pl.[plan_id])
+JOIN sys.query_store_runtime_stats_interval i ON (s.[runtime_stats_interval_id] = i.[runtime_stats_interval_id])
+WHERE  
+	qt.[query_sql_text] like '%posts%' AND
+	i.[start_time] > '20251119 07:00' AND
 	i.[start_time] < '20251119 23:59' 
-ORDER BY
-	i.[start_time] DESC;
+ORDER BY i.[start_time] DESC;
